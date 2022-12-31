@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import csv
+import csv, requests
 from flask import Flask, Response, render_template, request, abort
 from faker import Faker
 
@@ -39,6 +39,12 @@ def mean():
     avg_weight = sum(weights) / len(weights)
     return render_template('mean.html', avg_height=avg_height, avg_weight=avg_weight)
 
+@app.route('/space/')
+def space():
+    rd = requests.get("http://api.open-notify.org/astros.json").json()
+    count = rd['number']
+    return render_template('space.html', num_astronauts=count)
+    
 
 if __name__ == '__main__':
     app.debug = True
