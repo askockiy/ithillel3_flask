@@ -33,8 +33,8 @@ def mean():
         reader = csv.DictReader(f, fieldnames=["Index", "Height(Inches)", "Weight(Pounds)"])
         next(reader)
         for row in reader:
-            heights.append(float(row['Height(Inches)']))
-            weights.append(float(row['Weight(Pounds)']))
+            heights.append(float(row['Height(Inches)']) * 2.54)
+            weights.append(float(row['Weight(Pounds)']) * 0.45359237)
     avg_height = sum(heights) / len(heights)
     avg_weight = sum(weights) / len(weights)
     return render_template('mean.html', avg_height=avg_height, avg_weight=avg_weight)
